@@ -4,7 +4,6 @@ import json
 import numpy as np
 
 import head_model
-# 猫の骨格情報と2次元の姿勢座標から，　猫の3次元の姿勢を推定する
 
 PRE_2D_DATA_ROOT = './data/predata'
 INPUT_DATA_ROOT = './data/2D_data'
@@ -12,12 +11,12 @@ OUTPUT_DATA_ROOT = './data/3D_data'
 
 
 # 鼻，両目，両耳の付け根の5点のx,y座標から，それらのz座標を推定する
-def head_estimator(head: np.ndarray) -> list:
+def head_estimator(im_head: np.ndarray) -> list:
     deg_x = 0.
     deg_y = 0.
     deg_z = 0.
     scale = 1.
-    model = head_model.Head(head[4][0], head[4][1])
+    model = head_model.Head(im_head[4][0], im_head[4][1])
     min_loss = float('inf')
 
     # scaleのログスケールの調整
@@ -33,7 +32,7 @@ def head_estimator(head: np.ndarray) -> list:
                     # iが10までは,0.1×i倍のスケール, iが11からは,1×i倍のスケール
                     model.update(deg_x*20, deg_y*20, deg_z*20,
                                  scale*10**(1 - int(i/10))*i)
-                    loss = model.get_loss()
+                    loss = model.get_loss(im_head)
                     min_loss = min(min_loss, loss)
 
     return [model.current, scale]
@@ -58,9 +57,8 @@ def joint_estimator(start: list, end: list, dis: float, scale: float) -> list:
     z2 = start[2] - D
     return [z1, z2]
 
+
 # ３D座標を正規化する
-
-
 def normalize_coordinate(data: np.ndarray) -> list:
     """
     Normalize coordinate
