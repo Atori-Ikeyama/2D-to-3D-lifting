@@ -4,7 +4,13 @@ import numpy as np
 class Head():
 
     # 頭のモデル
+    # "L_Eye"
+    # "R_Eye"
+    # "L_EarBase"
+    # "R_EarBase"
+    # "Nose"
     head: np.ndarray
+    current: np.ndarray
 
     # パラメータ
     theta_x: float
@@ -14,14 +20,21 @@ class Head():
     slide_x: float
     slide_y: float
 
-    def __init__(self) -> None:
+    def getScale(self):
+        return self.scale
+
+    def deg_to_rad(deg):
+        return deg * np.pi / 180
+
+    def __init__(self, nose_x, nose_y) -> None:
         self.head = HeadModelData.getHeadData()
         self.theta_x = 0
         self.theta_y = 0
         self.theta_z = 0
         self.scale = 1
-        self.slide_x = 0
-        self.slide_y = 0
+        # 鼻を原点にする
+        self.slide_x = nose_x
+        self.slide_y = nose_y
 
     def _getRotateXMatrix(self, theta_x: float):
         sinx = np.sin(theta_x)
@@ -55,15 +68,15 @@ class Head():
         ry = self._getRotateYMatrix(theta_y)
         rz = self._getRotateZMatrix(theta_z)
 
-        self.headself.head @ rx @ ry @ rz
+        self.current = self.head @ rx @ ry @ rz
 
-    def scale(self, scale: float) -> None:
+    def scaleXYZ(self, scale: float) -> None:
         s = np.array([
             [scale, 0, 0],
             [0, scale, 0],
             [0, 0, scale]
         ])
-        self.head = self.head @ s
+        self.current = self.current @ s
 
     def slideXY(self, x: float, y: float) -> None:
         s = np.array([
@@ -73,18 +86,18 @@ class Head():
             [x, y, 0],
             [x, y, 0]
         ])
-        self.head = self.head + s
+        self.current = self.current + s
 
-    def update(self, theta_x: float, theta_y: float, theta_z: float, scale: float, x: float, y: float) -> None:
-        self.theta_x = theta_x
-        self.theta_y = theta_y
-        self.theta_z = theta_z
+    def update(self, deg_x: float, deg_y: float, deg_z: float, scale: float) -> None:
+        self.theta_x = self.deg_to_rad(deg_x)
+        self.theta_y = self.deg_to_rad(deg_y)
+        self.theta_z = self.deg_to_rad(deg_z)
         self.scale = scale
-        self.slide_x = x
-        self.slide_y = y
+        # self.slide_x = x
+        # self.slide_y = y
 
         self.rotateXYZ(self.theta_x, self.theta_y, self.theta_z)
-        self.scale(self.scale)
+        self.scaleXYZ(self.scale)
         self.slideXY(self.slide_x, self.slide_y)
 
     def getLoss(self, im_head) -> float:
