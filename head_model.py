@@ -23,7 +23,7 @@ class Head():
     def getScale(self):
         return self.scale
 
-    def deg_to_rad(deg):
+    def deg_to_rad(self, deg):
         return deg * np.pi / 180
 
     def __init__(self, nose_x, nose_y) -> None:
@@ -93,14 +93,12 @@ class Head():
         self.theta_y = self.deg_to_rad(deg_y)
         self.theta_z = self.deg_to_rad(deg_z)
         self.scale = scale
-        # self.slide_x = x
-        # self.slide_y = y
 
         self.rotateXYZ(self.theta_x, self.theta_y, self.theta_z)
         self.scaleXYZ(self.scale)
         self.slideXY(self.slide_x, self.slide_y)
 
-    def getLoss(self, im_head) -> float:
+    def get_loss(self, im_head) -> float:
         return np.sum(np.square(self.head - im_head))/len(self.head)
 
 

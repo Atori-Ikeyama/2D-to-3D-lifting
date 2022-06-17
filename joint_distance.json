@@ -1,0 +1,22 @@
+[
+        {"nose2l_eye_distance": 1},
+        {"nose2r_eye_distance": 1},
+        {"l_eye2r_eye_distance": 1},
+        {"l_eye2l_ear_base_distance": 1},
+        {"r_eye2r_ear_base_distance": 1},
+        {"nose2throat_distance": 1},
+        {"throat2withers_distance": 1},
+        {"throat2l_f_elbow_distance": 1},
+        {"throat2r_f_elbow_distance": 1},
+        {"l_f_elbow2l_f_knee_distance": 1},
+        {"r_f_elbow2r_f_knee_distance": 1},
+        {"l_f_knee2l_f_paw_distance": 1},
+        {"r_f_knee2r_f_paw_distance": 1},
+        {"withers2tail_base_distance": 1},
+        {"tail_base2l_b_elbow_distance": 1},
+        {"tail_base2r_b_elbow_distance": 1},
+        {"l_b_elbow2l_b_knee_distance": 1},
+        {"r_b_elbow2r_b_knee_distance": 1},
+        {"l_b_knee2l_b_paw_distance": 1},
+        {"r_b_knee2r_b_paw_distance": 1}
+]

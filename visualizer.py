@@ -12,7 +12,7 @@ VIDEO_2D_ROOT = './visualized_video/2D_data'
 VIDEO_3D_ROOT = './visualized_video/3D_data'
 
 
-def vis2D(file_name: str) -> None:
+def vis_2d(file_name: str) -> None:
     """
     Visualize 2D data
     """
@@ -77,7 +77,7 @@ def vis2D(file_name: str) -> None:
     plt.show()
 
 
-def vis3D(data: list) -> None:
+def vis_3d(data: list) -> None:
     """
     Visualize 3D data
     """
@@ -88,4 +88,4 @@ def vis3D(data: list) -> None:
     plt.show()
 
 
-vis2D('「おやつくれニャ〜」と飛び出して来ておかわりまで要求する猫 [bTXOn-6K1M4].json')
+vis_2d('「おやつくれニャ〜」と飛び出して来ておかわりまで要求する猫 [bTXOn-6K1M4].json')
