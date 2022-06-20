@@ -88,4 +88,9 @@ def vis_3d(data: list) -> None:
     plt.show()
 
 
-vis_2d('「おやつくれニャ〜」と飛び出して来ておかわりまで要求する猫 [bTXOn-6K1M4].json')
+def main():
+    vis_2d('「おやつくれニャ〜」と飛び出して来ておかわりまで要求する猫 [bTXOn-6K1M4].json')
+
+
+if __name__ == '__main__':
+    main()

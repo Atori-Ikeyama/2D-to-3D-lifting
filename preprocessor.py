@@ -1,14 +1,7 @@
 import os
 import json
-from turtle import color, width
-from cv2 import ROTATE_90_COUNTERCLOCKWISE
 
 import numpy as np
-import matplotlib.pyplot as plt
-import matplotlib.animation as animation
-from pyrsistent import v
-
-from visualizer import vis2D
 
 # 2D　のjsonファイルを読み込み、前処理をして、2D_dataにjsonファイルを生成する。
 
@@ -28,6 +21,10 @@ def is_low_confidence(data: list) -> bool:
 
         if pose['keypoints']['Nose']['score'] < 0.8:
             return True
+
+        for joint in pose['keypoints']:
+            if pose['keypoints'][joint]['score'] < 0.1:
+                return True
 
     return False
 
