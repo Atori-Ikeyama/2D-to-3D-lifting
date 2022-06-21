@@ -27,7 +27,13 @@ class Head():
         return deg * np.pi / 180
 
     def __init__(self, nose_x, nose_y) -> None:
-        self.head = HeadModelData.getHeadData()
+        self.head = np.array([
+            [2.0085, 2.5248, 1.4081],
+            [-2.0085, 2.5248, 1.4081],
+            [4.0859, 7.6959, 2.2928],
+            [-4.0859, 7.6959, 2.2928],
+            [0, 0, 0],
+        ])
         self.theta_x = 0
         self.theta_y = 0
         self.theta_z = 0
@@ -100,35 +106,3 @@ class Head():
 
     def get_loss(self, im_head) -> float:
         return np.sum(np.square(self.head - im_head))/len(self.head)
-
-
-class HeadModelData():
-    @staticmethod
-    def getHeadData():
-        return np.array([
-            [
-                1339.4813232421875,
-                1004.5853271484375,
-                0.996397852897644
-            ],
-            [
-                1289.616943359375,
-                997.4617919921875,
-                0.8979284763336182
-            ],
-            [
-                1360.851806640625,
-                954.720947265625,
-                0.84747314453125
-            ],
-            [
-                1282.493408203125,
-                944.0357666015625,
-                0.8657176494598389
-            ],
-            [
-                1303.8638916015625,
-                1033.0792236328125,
-                0.9093841910362244
-            ],
-        ])
