@@ -105,4 +105,4 @@ class Head():
         self.slideXY(self.slide_x, self.slide_y)
 
     def get_loss(self, im_head) -> float:
-        return np.sum(np.square(self.head - im_head))/len(self.head)
+        return np.sum(np.square(self.current[:, :2] - im_head))/len(self.current)
